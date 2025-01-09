@@ -3,115 +3,105 @@ import boto3
 import os
 from datetime import datetime, timezone, timedelta
 from typing import Dict, Optional, Any
-from io import BytesIO
 
-class WhatsAppS3Handler:
-    def __init__(self, bucket_name: str, timezone_offset: int = -6):
-        self.s3 = boto3.client('s3')
-        self.bucket_name = bucket_name
-        self.timezone_offset = timezone_offset
+class WhatsAppSQSHandler:
+    def __init__(self, queue_url: str, timezone_offset: int = -6):
+        """
+        Initializes the WhatsAppSQSHandler.
+        :param queue_url: The URL of the AWS SQS queue.
+        :param timezone_offset: The offset from UTC to the desired timezone (default is -6 for CST).
+        """
+        self.sqs = boto3.client('sqs')  # Initialize the SQS client
+        self.queue_url = queue_url  # Store the queue URL
+        self.timezone_offset = timezone_offset  # Store the timezone offset
 
     def _convert_timestamp(self, timestamp: int) -> str:
-        """Convert Unix timestamp to formatted datetime string with timezone offset."""
+        """
+        Convert a Unix timestamp to a formatted datetime string with timezone offset.
+        :param timestamp: Unix timestamp (in seconds).
+        :return: A formatted datetime string in the local timezone.
+        """
         try:
-            utc_time = datetime.fromtimestamp(timestamp, timezone.utc)
-            local_time = utc_time + timedelta(hours=self.timezone_offset)
-            return local_time.strftime("%Y-%m-%d %H:%M:%S")
+            utc_time = datetime.fromtimestamp(timestamp, timezone.utc)  # Convert to UTC time
+            local_time = utc_time + timedelta(hours=self.timezone_offset)  # Apply timezone offset
+            return local_time.strftime("%Y-%m-%d %H:%M:%S")  # Return formatted string
         except (ValueError, TypeError) as e:
             raise ValueError(f"Invalid timestamp format: {e}")
 
     def _extract_message_data(self, payload: Dict) -> Optional[Dict[str, Any]]:
-        """Safely extract message data from webhook payload."""
+        """
+        Safely extract message data from the webhook payload.
+        :param payload: The JSON payload received from the webhook.
+        :return: A dictionary with the message details or None if the message is invalid.
+        """
         try:
+            # Navigate through nested structure to extract the first message
             message = payload["entry"][0]["changes"][0]["value"]["messages"][0]
-            
-            if message["type"] != "text":
-                return None
-                
             return {
-                "from": message["from"],
-                "timestamp": int(message["timestamp"]),
-                "text": message["text"]["body"]
+                "from": message["from"],  # Sender's phone number
+                "timestamp": self._convert_timestamp(int(message["timestamp"])),  # Convert timestamp
+                "text": message["text"]["body"]  # Extract message text
             }
-        except (KeyError, IndexError, TypeError) as e:
-            raise KeyError(f"Failed to extract message data: {e}")
+        except (IndexError, KeyError, ValueError) as e:
+            print(f"Error extracting message data: {e}")
+            return None
 
-    def _prepare_message_object(self, message_data: Dict) -> Dict:
-        """Prepare message object for storage."""
-        return {
-            "messages": [{
-                "from": message_data["from"],
-                "timestamp": self._convert_timestamp(message_data["timestamp"]),
-                "text": {"body": message_data["text"]}
-            }]
-        }
-
-    def save_message(self, message_data: Dict) -> None:
-        """Save message to S3 using upload_fileobj."""
-        message_object = self._prepare_message_object(message_data)
-        
-        # Convert dictionary to JSON bytes
-        json_data = json.dumps(message_object).encode('utf-8')
-        file_obj = BytesIO(json_data)
-        
-        # Generate S3 key
-        s3_key = f"messages/{message_data['from']}/message.json"
-        
-        # Upload to S3
+    def send_to_queue(self, message_data: Dict) -> None:
+        """
+        Send the processed message data to the SQS queue.
+        :param message_data: The dictionary containing the processed message.
+        """
         try:
-            self.s3.upload_fileobj(
-                file_obj,
-                self.bucket_name,
-                s3_key,
-                ExtraArgs={'ContentType': 'application/json'}
+            # Send the message to SQS as a JSON-encoded string
+            self.sqs.send_message(
+                QueueUrl=self.queue_url,
+                MessageBody=json.dumps(message_data)
             )
         except Exception as e:
-            raise IOError(f"Failed to upload to S3: {e}")
-
-def create_response(status_code: int, message: str = "") -> Dict:
-    """Create standardized API response."""
-    response = {"statusCode": status_code}
-    if message:
-        response["body"] = json.dumps({"message": message})
-    return response
+            raise IOError(f"Failed to send message to SQS: {e}")
 
 def lambda_handler(event, context):
-    # Initialize handler with environment variables    
+    """
+    AWS Lambda handler function.
+    Processes incoming webhook events and sends valid WhatsApp messages to SQS.
+    :param event: The event payload from the webhook.
+    :param context: The Lambda execution context (not used in this function).
+    :return: An API Gateway-compatible response.
+    """
     try:
-        handler = WhatsAppS3Handler(
-            bucket_name=os.environ["BUCKET_NAME"],
-            timezone_offset=-6
+        # Initialize the WhatsAppSQSHandler with the queue URL from environment variables
+        handler = WhatsAppSQSHandler(
+            queue_url=os.environ["QUEUE_URL"],
+            timezone_offset=-6  # Default to CST
         )
-        # Parse webhook payload
-        if not event.get("body"):
-            return create_response(200, "No body in request")
-            
+
+        # Parse the incoming request body
         body = json.loads(event["body"])
-        
-        # Extract message data
-        try:
-            message_data = handler._extract_message_data(body)
-        except KeyError as e:
-            print(f"Error extracting message data: {e}")
-            return create_response(200, "Invalid message format")
-            
-        # Process only text messages
+        print(f"body: {body}")
+
+        # Extract message data from the parsed payload
+        message_data = handler._extract_message_data(body)
+        print(f"message_data: {message_data}")
+
+        # Skip processing if no valid message data is found
         if not message_data:
-            return create_response(200, "Non-text message received")
-            
-        # Save message to S3
+            return {"statusCode": 200}
+
+        # Send the extracted message data to SQS
         try:
-            handler.save_message(message_data)
+            handler.send_to_queue(message_data)
         except IOError as e:
-            print(f"Error saving to S3: {e}")
-            return create_response(500, f"Failed to save message: {e}")
-            
-        return create_response(200, "Message processed successfully")
-        
+            print(f"Error sending message to SQS: {e}")
+            return {"statusCode": 200}
+
+        return {"statusCode": 200}
+
     except json.JSONDecodeError as e:
+        # Handle cases where the incoming payload is not valid JSON
         print(f"Invalid JSON in webhook payload: {e}")
-        return create_response(400, f"Invalid JSON payload: {e}")
-        
+        return {"statusCode": 200}
+
     except Exception as e:
+        # Catch any other unexpected exceptions
         print(f"Unexpected error: {e}")
-        return create_response(500, f"Internal server error: {e}")
+        return {"statusCode": 200}
