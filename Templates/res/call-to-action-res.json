@@ -1,0 +1,46 @@
+{
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are an assistant that helps schedule installations of the coxcox.ai agent for companies. To proceed, kindly gather the following details from the user if not already provided in the conversation:\n\nCompany Name: Please provide the name of the company where the coxcox.ai agent will be installed.\nLocation: Where is the company located? (Include city, state, and country if possible).\nInstallation Time Availability: When would be a convenient time for someone from the company to install the coxcox.ai agent? Please specify the available time slot(s).\nOnce you have this information return true"
+    },
+    {
+      "role": "user",
+      "content": "I would like to install the IA agent on my company, what i need to do?"
+    },
+    {
+      "role": "assistant",
+      "content": "To proceed with scheduling the installation of the coxcox.ai agent for your company, I need some details from you. Could you please provide the following information:\n\n1. **Company Name**: What is the name of your company where the coxcox.ai agent will be installed?\n2. **Location**: Where is your company located? (Please include city, state, and country if possible).\n3. **Installation Time Availability**: When would be a convenient time for someone from your company to install the coxcox.ai agent? Please specify the available time slot(s).\n\nOnce I have this information, I can assist you further with the installation process and return a confirmation."
+    },
+    {
+      "role": "user",
+      "content": "The company name is Vinos america we are in Mojoneras calle rio danubio 369"
+    },
+    {
+      "role": "assistant",
+      "content": "Thank you for providing the company name and location. To recap, here are the details you've shared so far:\n\n1. **Company Name**: Vinos America\n2. **Location**: Mojoneras, Calle Rio Danubio 369\n\nHowever, I still need to know the city, state, and country to ensure accurate scheduling. Mojoneras seems to be a locality, but I'd like to confirm the full address. Could you please provide the following:\n\n* City\n* State/Province (if applicable)\n* Country\n\nAdditionally, I need to know your availability for the installation:\n\n3. **Installation Time Availability**: When would be a convenient time for someone from Vinos America to install the coxcox.ai agent? Please specify the available time slot(s), including dates and times that work best for you.\n\nOnce I have this information, I can confirm the details and return a confirmation."
+    },
+    {
+      "role": "user",
+      "content": "Guadalagara Jalisco Mexico"
+    },
+    {
+      "role": "assistant",
+      "content": "Thank you for providing the complete address. To recap, here are the details you've shared:\n\n1. **Company Name**: Vinos America\n2. **Location**: Mojoneras, Calle Rio Danubio 369, Guadalajara, Jalisco, Mexico\n\nNow, I just need to know your availability for the installation:\n\n3. **Installation Time Availability**: When would be a convenient time for someone from Vinos America to install the coxcox.ai agent? Please specify the available time slot(s), including dates and times that work best for you.\n\nCould you please provide me with some specific dates and times when someone from your company will be available to install the coxcox.ai agent?\n\nOnce I have this information, I can confirm the details and return a confirmation. \n\n(Please respond with your availability, and I'll be happy to assist you further)"
+    },
+    {
+      "role": "user",
+      "content": "It is good for me at 9 AM on monday"
+    },
+    {
+      "role": "assistant",
+      "content": "Thank you for providing the installation time availability. To recap, here are the details you've shared:\n\n1. **Company Name**: Vinos America\n2. **Location**: Mojoneras, Calle Rio Danubio 369, Guadalajara, Jalisco, Mexico\n3. **Installation Time Availability**: 9:00 AM on Monday\n\nI have all the necessary information to proceed with scheduling the installation of the coxcox.ai agent for your company. \n\n**Confirmation:** true\n\nPlease expect a follow-up from our team to confirm the installation details and provide any additional instructions or requirements. If you have any further questions or concerns, feel free to ask!"
+    }
+  ],
+  "model": "llama-3.3-70b-versatile",
+  "temperature": 1,
+  "max_tokens": 1024,
+  "top_p": 1,
+  "stream": true,
+  "stop": null
+}
