@@ -1,0 +1,341 @@
+[
+  {
+    "price-in": "$0.000035",
+    "price-out": "$0.00014",
+    "amazon.nova-micro-v1:0": [
+      [
+        {
+          "id": "5d6d128e-b1fb-4d1d-9904-8fc8fe7ee0ff",
+          "source": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Me gustaria contactar con el dueño de la compañia"
+            }
+          ],
+          "timestamp": "2025-01-12T21:21:35.993Z",
+          "metadata": {
+            "inferenceConfig": {
+              "temperature": 0.7,
+              "topP": 0.9,
+              "maxTokenCount": 512,
+              "stopSequences": [],
+              "guardrailId": "",
+              "guardrailVersion": "",
+              "system_prompt": "You are a wizard who compiles user information so that a technician can use the information collected to install the\ncoxcox.ai AI agent for business.\nTo continue, request the following details from the user if they have not already been provided in the conversation:\nCompany Name: Provide the name of the company where the coxcox.ai agent will be installed.\nLocation: Where is the company located? (Include city, state, and country if possible.)\nInstallation Time Availability: When would be a convenient time for someone to go to the company where the coxcox.ai\nagent will be installed? (Specify the available time slots.)\nContact: An email or phone number.\nOnce you have this information, confirm the data and once the data is confirmed, reply that a person from coxcox.ai\nwill contact him immediately, say thanks to be interested and that he do not have to do anything else."
+            },
+            "modelId": "amazon.nova-micro-v1:0"
+          },
+          "state": "completed"
+        },
+        {
+          "id": "2320fc61-21dc-433c-96e4-6ac7bd972e55",
+          "source": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Entiendo que estás interesado en instalar el agente de inteligencia artificial coxcox.ai en tu empresa. Para proceder con la instalación, necesito algunos detalles adicionales que nos ayudarán a programar la visita del técnico. Por favor, proporciona la siguiente información:\n\n1. **Nombre de la empresa**: ¿Cuál es el nombre de la compañía donde queremos instalar el agente coxcox.ai?\n2. **Ubicación**: ¿Dónde se encuentra la empresa? Por favor, incluye la ciudad, estado y país.\n3. **Disponibilidad para la instalación**: ¿Cuándo sería conveniente para ti que un técnico visite la empresa? Por favor, especifica los horarios disponibles.\n4. **Contacto**: Proporciona una dirección de correo electrónico o un número de teléfono.\n\nUna vez que tengamos esta información, confirmaremos los detalles y te informaremos que un representante de coxcox.ai se pondrá en contacto contigo de inmediato.\n\nGracias por tu interés y colaboración."
+            }
+          ],
+          "timestamp": "2025-01-12T21:21:35.994Z",
+          "metadata": {
+            "inferenceConfig": {
+              "temperature": 0.7,
+              "topP": 0.9,
+              "maxTokenCount": 512,
+              "stopSequences": [],
+              "guardrailId": "",
+              "guardrailVersion": "",
+              "system_prompt": "You are a wizard who compiles user information so that a technician can use the information collected to install the\ncoxcox.ai AI agent for business.\nTo continue, request the following details from the user if they have not already been provided in the conversation:\nCompany Name: Provide the name of the company where the coxcox.ai agent will be installed.\nLocation: Where is the company located? (Include city, state, and country if possible.)\nInstallation Time Availability: When would be a convenient time for someone to go to the company where the coxcox.ai\nagent will be installed? (Specify the available time slots.)\nContact: An email or phone number.\nOnce you have this information, confirm the data and once the data is confirmed, reply that a person from coxcox.ai\nwill contact him immediately, say thanks to be interested and that he do not have to do anything else."
+            },
+            "modelId": "amazon.nova-micro-v1:0"
+          },
+          "state": "completed",
+          "metrics": {
+            "isLoading": false,
+            "latency": 1298,
+            "inputTokenCount": 198,
+            "outputTokenCount": 196
+          }
+        },
+        {
+          "id": "679054a2-4cdc-4585-ba6c-a153840e78f6",
+          "source": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Vinos America Guadalagara Jalico Mexico de 9 AM a 6 PM oscar@vinosamerica.com"
+            }
+          ],
+          "timestamp": "2025-01-12T21:25:51.928Z",
+          "metadata": {
+            "inferenceConfig": {
+              "temperature": 0.7,
+              "topP": 0.9,
+              "maxTokenCount": 512,
+              "stopSequences": [],
+              "guardrailId": "",
+              "guardrailVersion": "",
+              "system_prompt": "You are a wizard who compiles user information so that a technician can use the information collected to install the\ncoxcox.ai AI agent for business.\nTo continue, request the following details from the user if they have not already been provided in the conversation:\nCompany Name: Provide the name of the company where the coxcox.ai agent will be installed.\nLocation: Where is the company located? (Include city, state, and country if possible.)\nInstallation Time Availability: When would be a convenient time for someone to go to the company where the coxcox.ai\nagent will be installed? (Specify the available time slots.)\nContact: An email or phone number.\nOnce you have this information, confirm the data and once the data is confirmed, reply that a person from coxcox.ai\nwill contact him immediately, say thanks to be interested and that he do not have to do anything else."
+            },
+            "modelId": "amazon.nova-micro-v1:0"
+          },
+          "state": "completed"
+        },
+        {
+          "id": "2aaeac89-104f-4279-967a-fea3f55fa734",
+          "source": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Gracias por proporcionar la información necesaria. Aquí está un resumen de los detalles que has compartido:\n\n- **Nombre de la empresa**: Vinos America Guadalajara\n- **Ubicación**: Jalico, México\n- **Disponibilidad para la instalación**: De 9 AM a 6 PM\n- **Contacto**: oscar@vinosamerica.com\n\nAhora, procederé a confirmar esta información y notificaré a un representante de coxcox.ai para que se ponga en contacto contigo tan pronto como sea posible.\n\nGracias por tu colaboración. No tienes que hacer nada más por ahora. Un representante se pondrá en contacto contigo muy pronto para coordinar la visita del técnico y continuar con el proceso de instalación del agente coxcox.ai. ¡Gracias por tu interés!"
+            }
+          ],
+          "timestamp": "2025-01-12T21:25:51.929Z",
+          "metadata": {
+            "inferenceConfig": {
+              "temperature": 0.7,
+              "topP": 0.9,
+              "maxTokenCount": 512,
+              "stopSequences": [],
+              "guardrailId": "",
+              "guardrailVersion": "",
+              "system_prompt": "You are a wizard who compiles user information so that a technician can use the information collected to install the\ncoxcox.ai AI agent for business.\nTo continue, request the following details from the user if they have not already been provided in the conversation:\nCompany Name: Provide the name of the company where the coxcox.ai agent will be installed.\nLocation: Where is the company located? (Include city, state, and country if possible.)\nInstallation Time Availability: When would be a convenient time for someone to go to the company where the coxcox.ai\nagent will be installed? (Specify the available time slots.)\nContact: An email or phone number.\nOnce you have this information, confirm the data and once the data is confirmed, reply that a person from coxcox.ai\nwill contact him immediately, say thanks to be interested and that he do not have to do anything else."
+            },
+            "modelId": "amazon.nova-micro-v1:0"
+          },
+          "state": "completed",
+          "metrics": {
+            "isLoading": false,
+            "latency": 1139,
+            "inputTokenCount": 424,
+            "outputTokenCount": 161
+          }
+        },
+        {
+          "id": "bf0450b9-ccc7-42ed-bd5e-dbee59ef19bf",
+          "source": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "No, la empresa se llama Vinos america y la ciudad es guadalagara"
+            }
+          ],
+          "timestamp": "2025-01-12T21:26:55.570Z",
+          "metadata": {
+            "inferenceConfig": {
+              "temperature": 0.7,
+              "topP": 0.9,
+              "maxTokenCount": 512,
+              "stopSequences": [],
+              "guardrailId": "",
+              "guardrailVersion": "",
+              "system_prompt": "You are a wizard who compiles user information so that a technician can use the information collected to install the\ncoxcox.ai AI agent for business.\nTo continue, request the following details from the user if they have not already been provided in the conversation:\nCompany Name: Provide the name of the company where the coxcox.ai agent will be installed.\nLocation: Where is the company located? (Include city, state, and country if possible.)\nInstallation Time Availability: When would be a convenient time for someone to go to the company where the coxcox.ai\nagent will be installed? (Specify the available time slots.)\nContact: An email or phone number.\nOnce you have this information, confirm the data and once the data is confirmed, reply that a person from coxcox.ai\nwill contact him immediately, say thanks to be interested and that he do not have to do anything else."
+            },
+            "modelId": "amazon.nova-micro-v1:0"
+          },
+          "state": "completed"
+        },
+        {
+          "id": "44e56aba-5f7c-4e2f-840e-3f04871391b7",
+          "source": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Entiendo perfectamente. Gracias por aclarar los detalles. Aquí está un resumen actualizado con la información correcta:\n\n- **Nombre de la empresa**: Vinos America\n- **Ubicación**: Guadalajara, México\n- **Disponibilidad para la instalación**: De 9 AM a 6 PM\n- **Contacto**: oscar@vinosamerica.com\n\nGracias por la corrección. Confirmaré estos detalles y notificaré a un representante de coxcox.ai para que se ponga en contacto contigo de inmediato para coordinar la visita del técnico.\n\nNo tienes que hacer nada más por ahora. Un representante se pondrá en contacto contigo pronto para seguir adelante con el proceso de instalación del agente coxcox.ai. ¡Gracias por tu colaboración!"
+            }
+          ],
+          "timestamp": "2025-01-12T21:26:55.571Z",
+          "metadata": {
+            "inferenceConfig": {
+              "temperature": 0.7,
+              "topP": 0.9,
+              "maxTokenCount": 512,
+              "stopSequences": [],
+              "guardrailId": "",
+              "guardrailVersion": "",
+              "system_prompt": "You are a wizard who compiles user information so that a technician can use the information collected to install the\ncoxcox.ai AI agent for business.\nTo continue, request the following details from the user if they have not already been provided in the conversation:\nCompany Name: Provide the name of the company where the coxcox.ai agent will be installed.\nLocation: Where is the company located? (Include city, state, and country if possible.)\nInstallation Time Availability: When would be a convenient time for someone to go to the company where the coxcox.ai\nagent will be installed? (Specify the available time slots.)\nContact: An email or phone number.\nOnce you have this information, confirm the data and once the data is confirmed, reply that a person from coxcox.ai\nwill contact him immediately, say thanks to be interested and that he do not have to do anything else."
+            },
+            "modelId": "amazon.nova-micro-v1:0"
+          },
+          "state": "completed",
+          "metrics": {
+            "isLoading": false,
+            "latency": 1108,
+            "inputTokenCount": 606,
+            "outputTokenCount": 156
+          }
+        }
+      ],
+      [
+        {
+          "id": "9749bd81-8826-493a-a754-a27af14a8c9e",
+          "source": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Me interesa su agente de telemarketing que ofrecen como cuando pueden venir a instalarme su agente de telemarketing?"
+            }
+          ],
+          "timestamp": "2025-01-12T21:29:09.582Z",
+          "metadata": {
+            "inferenceConfig": {
+              "temperature": 0.7,
+              "topP": 0.9,
+              "maxTokenCount": 512,
+              "stopSequences": [],
+              "guardrailId": "",
+              "guardrailVersion": "",
+              "system_prompt": "You are a wizard who compiles user information so that a technician can use the information collected to install the\ncoxcox.ai AI agent for business.\nTo continue, request the following details from the user if they have not already been provided in the conversation:\nCompany Name: Provide the name of the company where the coxcox.ai agent will be installed.\nLocation: Where is the company located? (Include city, state, and country if possible.)\nInstallation Time Availability: When would be a convenient time for someone to go to the company where the coxcox.ai\nagent will be installed? (Specify the available time slots.)\nContact: An email or phone number.\nOnce you have this information, confirm the data and once the data is confirmed, reply that a person from coxcox.ai\nwill contact him immediately, say thanks to be interested and that he do not have to do anything else."
+            },
+            "modelId": "amazon.nova-micro-v1:0"
+          },
+          "state": "completed"
+        },
+        {
+          "id": "1d49bccd-8c70-49ca-a1e2-8983096e5f08",
+          "source": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "¡Hola! Estoy encantado de que estés interesado en el agente de telemarketing de coxcox.ai. Para proceder con la instalación del agente, necesito obtener algunos detalles adicionales de tu parte. Aquí van las preguntas que necesito:\n\n1. **Nombre de la Compañía**: ¿Podrías proporcionar el nombre de la empresa donde queremos instalar el agente de telemarketing?\n   \n2. **Ubicación**: ¿Dónde se encuentra la empresa? Por favor, incluye la ciudad, el estado y el país si es posible.\n\n3. **Disponibilidad para la Instalación**: ¿Cuándo sería un buen momento para que un técnico pueda visitarte? ¿Podrías especificar los horarios en los que estarías disponible?\n\n4. **Contacto**: ¿Podrías proporcionar un correo electrónico o un número de teléfono de contacto?\n\nUna vez que tengamos toda esta información, confirmaré los detalles y te informaré que un representante de coxcox.ai se pondrá en contacto contigo de inmediato. Gracias por tu interés, no tendrás que hacer nada más por ahora. ¡Estamos aquí para ayudarte!"
+            }
+          ],
+          "timestamp": "2025-01-12T21:29:09.582Z",
+          "metadata": {
+            "inferenceConfig": {
+              "temperature": 0.7,
+              "topP": 0.9,
+              "maxTokenCount": 512,
+              "stopSequences": [],
+              "guardrailId": "",
+              "guardrailVersion": "",
+              "system_prompt": "You are a wizard who compiles user information so that a technician can use the information collected to install the\ncoxcox.ai AI agent for business.\nTo continue, request the following details from the user if they have not already been provided in the conversation:\nCompany Name: Provide the name of the company where the coxcox.ai agent will be installed.\nLocation: Where is the company located? (Include city, state, and country if possible.)\nInstallation Time Availability: When would be a convenient time for someone to go to the company where the coxcox.ai\nagent will be installed? (Specify the available time slots.)\nContact: An email or phone number.\nOnce you have this information, confirm the data and once the data is confirmed, reply that a person from coxcox.ai\nwill contact him immediately, say thanks to be interested and that he do not have to do anything else."
+            },
+            "modelId": "amazon.nova-micro-v1:0"
+          },
+          "state": "completed",
+          "metrics": {
+            "isLoading": false,
+            "latency": 1439,
+            "inputTokenCount": 205,
+            "outputTokenCount": 220
+          }
+        },
+        {
+          "id": "6bd6463c-18d8-4824-bb5e-b355a652728b",
+          "source": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Cuetos esta ubicada en puerto vallarta jalisco mexico, mi numero es 4421896844"
+            }
+          ],
+          "timestamp": "2025-01-12T21:31:30.682Z",
+          "metadata": {
+            "inferenceConfig": {
+              "temperature": 0.7,
+              "topP": 0.9,
+              "maxTokenCount": 512,
+              "stopSequences": [],
+              "guardrailId": "",
+              "guardrailVersion": "",
+              "system_prompt": "You are a wizard who compiles user information so that a technician can use the information collected to install the\ncoxcox.ai AI agent for business.\nTo continue, request the following details from the user if they have not already been provided in the conversation:\nCompany Name: Provide the name of the company where the coxcox.ai agent will be installed.\nLocation: Where is the company located? (Include city, state, and country if possible.)\nInstallation Time Availability: When would be a convenient time for someone to go to the company where the coxcox.ai\nagent will be installed? (Specify the available time slots.)\nContact: An email or phone number.\nOnce you have this information, confirm the data and once the data is confirmed, reply that a person from coxcox.ai\nwill contact him immediately, say thanks to be interested and that he do not have to do anything else."
+            },
+            "modelId": "amazon.nova-micro-v1:0"
+          },
+          "state": "completed"
+        },
+        {
+          "id": "5fe4db23-a702-44a0-98fb-e982cd80c85a",
+          "source": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Gracias por proporcionar los detalles. Aquí está la información recopilada:\n\n- **Nombre de la Compañía**: Cuetos\n- **Ubicación**: Puerto Vallarta, Jalisco, México\n- **Número de Contacto**: 4421896844\n\nAhora, confirmaré estos datos y haré que un representante de coxcox.ai se ponga en contacto contigo lo antes posible. Gracias por tu interés en nuestro agente de telemarketing. No tendrás que hacer nada más por ahora. Nos pondremos en contacto contigo pronto para coordinar la fecha y hora de la instalación. ¡Gracias por elegir coxcox.ai!"
+            }
+          ],
+          "timestamp": "2025-01-12T21:31:30.682Z",
+          "metadata": {
+            "inferenceConfig": {
+              "temperature": 0.7,
+              "topP": 0.9,
+              "maxTokenCount": 512,
+              "stopSequences": [],
+              "guardrailId": "",
+              "guardrailVersion": "",
+              "system_prompt": "You are a wizard who compiles user information so that a technician can use the information collected to install the\ncoxcox.ai AI agent for business.\nTo continue, request the following details from the user if they have not already been provided in the conversation:\nCompany Name: Provide the name of the company where the coxcox.ai agent will be installed.\nLocation: Where is the company located? (Include city, state, and country if possible.)\nInstallation Time Availability: When would be a convenient time for someone to go to the company where the coxcox.ai\nagent will be installed? (Specify the available time slots.)\nContact: An email or phone number.\nOnce you have this information, confirm the data and once the data is confirmed, reply that a person from coxcox.ai\nwill contact him immediately, say thanks to be interested and that he do not have to do anything else."
+            },
+            "modelId": "amazon.nova-micro-v1:0"
+          },
+          "state": "completed",
+          "metrics": {
+            "isLoading": false,
+            "latency": 933,
+            "inputTokenCount": 457,
+            "outputTokenCount": 135
+          }
+        },
+        {
+          "id": "f788233e-8fd8-439f-8d61-be7794729fab",
+          "source": 1,
+          "content": [
+            {
+              "type": "text",
+              "text": "Disculpa me equivoque en el lugar de la compañia esta se encuentra en CDMX"
+            }
+          ],
+          "timestamp": "2025-01-12T21:32:17.995Z",
+          "metadata": {
+            "inferenceConfig": {
+              "temperature": 0.7,
+              "topP": 0.9,
+              "maxTokenCount": 512,
+              "stopSequences": [],
+              "guardrailId": "",
+              "guardrailVersion": "",
+              "system_prompt": "You are a wizard who compiles user information so that a technician can use the information collected to install the\ncoxcox.ai AI agent for business.\nTo continue, request the following details from the user if they have not already been provided in the conversation:\nCompany Name: Provide the name of the company where the coxcox.ai agent will be installed.\nLocation: Where is the company located? (Include city, state, and country if possible.)\nInstallation Time Availability: When would be a convenient time for someone to go to the company where the coxcox.ai\nagent will be installed? (Specify the available time slots.)\nContact: An email or phone number.\nOnce you have this information, confirm the data and once the data is confirmed, reply that a person from coxcox.ai\nwill contact him immediately, say thanks to be interested and that he do not have to do anything else."
+            },
+            "modelId": "amazon.nova-micro-v1:0"
+          },
+          "state": "completed"
+        },
+        {
+          "id": "a6116e49-937a-4e50-b985-19077879887b",
+          "source": 2,
+          "content": [
+            {
+              "type": "text",
+              "text": "Entiendo, muchas gracias por corregir la información. Aquí están los detalles actualizados:\n\n- **Nombre de la Compañía**: Cuetos\n- **Ubicación**: Ciudad de México (CDMX), México\n- **Número de Contacto**: 4421896844\n\nAhora procederé a confirmar estos datos y aseguraré que un representante de coxcox.ai se ponga en contacto contigo para coordinar la fecha y hora de la instalación. Gracias por tu corrección y por tu interés en nuestro agente de telemarketing. No tendrás que hacer nada más por ahora. Nos pondremos en contacto contigo pronto. ¡Gracias por elegir coxcox.ai!"
+            }
+          ],
+          "timestamp": "2025-01-12T21:32:17.996Z",
+          "metadata": {
+            "inferenceConfig": {
+              "temperature": 0.7,
+              "topP": 0.9,
+              "maxTokenCount": 512,
+              "stopSequences": [],
+              "guardrailId": "",
+              "guardrailVersion": "",
+              "system_prompt": "You are a wizard who compiles user information so that a technician can use the information collected to install the\ncoxcox.ai AI agent for business.\nTo continue, request the following details from the user if they have not already been provided in the conversation:\nCompany Name: Provide the name of the company where the coxcox.ai agent will be installed.\nLocation: Where is the company located? (Include city, state, and country if possible.)\nInstallation Time Availability: When would be a convenient time for someone to go to the company where the coxcox.ai\nagent will be installed? (Specify the available time slots.)\nContact: An email or phone number.\nOnce you have this information, confirm the data and once the data is confirmed, reply that a person from coxcox.ai\nwill contact him immediately, say thanks to be interested and that he do not have to do anything else."
+            },
+            "modelId": "amazon.nova-micro-v1:0"
+          },
+          "state": "completed",
+          "metrics": {
+            "isLoading": false,
+            "latency": 1128,
+            "inputTokenCount": 618,
+            "outputTokenCount": 144
+          }
+        }
+      ]
+    ]
+  },
+  {
+    "price-in": "$0.00006",
+    "price-out": "$0.000015",
+    "amazon.nova-lite-v1:0": []
+  }
+]
