@@ -36,9 +36,8 @@ def decision_agent(state: AgentState):
     system_message = system_prompt_template.format(context=formatted_context)
     print(f"Formatted system_message:\n{formatted_context}\n")
     response = llm_decision.invoke([system_message] + state["messages"][-1:])
-    return {"decision": response.content}
-
-  response = llm_decision.invoke([system_message] + state["messages"])
+  else:
+    response = llm_decision.invoke([SystemMessage(content=DECISION_AGENT_TEMPLATE)] + state["messages"])
   return {"decision": response.content}
 
 def answering_questions(state: AgentState):
@@ -68,16 +67,17 @@ builder.add_node("malicious_query", malicious_query)
 builder.add_edge(START, "decision_agent")
 
 def route_decision(state: AgentState):
-  if "Use Case 1" in state["decision"]:
+  decision = state["decision"]
+  if "Use Case 1" in decision:
     return "answering_questions"
-  elif "Use Case 2" in state["decision"]:
+  elif "Use Case 2" in decision:
     return "example_generator"
-  elif "Use Case 3" in state["decision"]:
+  elif "Use Case 3" in decision:
     return "call_to_action"
-  elif "Malicious Query" in state["decision"]:
+  elif "Malicious Query" in decision:
     return "malicious_query"
   else:
-    print(f"Unrecognized decision: {state["decision"]}")  # Debugging line
+    print(f"Unrecognized decision: {decision}")  # Debugging line
     return END  # Default case to avoid returning None
 
 builder.add_conditional_edges("decision_agent", route_decision, 
