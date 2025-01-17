@@ -1,6 +1,7 @@
 from contextlib import contextmanager
-from typing import Any, Iterator, List, Optional, Tuple
+from typing import Any, Iterator, List, Optional, Tuple, Union
 import json
+import base64
 import boto3
 from botocore.exceptions import ClientError
 from langchain_core.runnables import RunnableConfig
@@ -17,13 +18,29 @@ from langgraph.checkpoint.base import (
 
 S3_KEY_SEPARATOR = "/"
 
+class BytesEncoder(json.JSONEncoder):
+    """Custom JSON encoder that handles bytes objects."""
+    def default(self, obj):
+        if isinstance(obj, bytes):
+            return {
+                "__type__": "bytes",
+                "data": base64.b64encode(obj).decode('utf-8')
+            }
+        return super().default(obj)
+
+def bytes_decoder(obj):
+    """Custom JSON decoder that handles bytes objects."""
+    if "__type__" in obj and obj["__type__"] == "bytes":
+        return base64.b64decode(obj["data"].encode('utf-8'))
+    return obj
+
 def _make_s3_checkpoint_key(
-    thread_id: str, checkpoint_ns: str, checkpoint_id: str
+    thread_id: int, checkpoint_ns: str, checkpoint_id: str
 ) -> str:
     return f"checkpoints{S3_KEY_SEPARATOR}{thread_id}{S3_KEY_SEPARATOR}{checkpoint_ns}{S3_KEY_SEPARATOR}{checkpoint_id}.json"
 
 def _make_s3_writes_key(
-    thread_id: str,
+    thread_id: int,
     checkpoint_ns: str,
     checkpoint_id: str,
     task_id: str,
@@ -67,7 +84,7 @@ class S3Saver(BaseCheckpointSaver):
         new_versions: ChannelVersions,
     ) -> RunnableConfig:
         """Save a checkpoint to S3."""
-        thread_id = config["configurable"]["thread_id"]
+        thread_id = int(config["configurable"]["thread_id"])
         checkpoint_ns = config["configurable"].get("checkpoint_ns", "")
         checkpoint_id = checkpoint["id"]
         parent_checkpoint_id = config["configurable"].get("checkpoint_id")
@@ -84,10 +101,13 @@ class S3Saver(BaseCheckpointSaver):
             "parent_checkpoint_id": parent_checkpoint_id if parent_checkpoint_id else "",
         }
         
+        # Use custom JSON encoder for bytes objects
+        json_str = json.dumps(data, cls=BytesEncoder)
+        
         self.s3_client.put_object(
             Bucket=self.bucket_name,
             Key=key,
-            Body=json.dumps(data)
+            Body=json_str
         )
         
         return {
@@ -105,7 +125,7 @@ class S3Saver(BaseCheckpointSaver):
         task_id: str,
     ) -> None:
         """Store intermediate writes linked to a checkpoint."""
-        thread_id = config["configurable"]["thread_id"]
+        thread_id = int(config["configurable"]["thread_id"])
         checkpoint_ns = config["configurable"].get("checkpoint_ns", "")
         checkpoint_id = config["configurable"]["checkpoint_id"]
 
@@ -125,15 +145,28 @@ class S3Saver(BaseCheckpointSaver):
                 "value": serialized_value
             }
             
+            # Use custom JSON encoder for bytes objects
+            json_str = json.dumps(data, cls=BytesEncoder)
+            
             self.s3_client.put_object(
                 Bucket=self.bucket_name,
                 Key=key,
-                Body=json.dumps(data)
+                Body=json_str
             )
 
-    def get_tuple(self, config: RunnableConfig) -> Optional[CheckpointTuple]:
+
+    def get(self, config: Union[str, dict, RunnableConfig]) -> Optional[Any]:
+        """Get a checkpoint using a string thread_id or config dict."""
+        if isinstance(config, str):
+            config = {"configurable": {"thread_id": config}}
+        return super().get(config)
+
+    def get_tuple(self, config: Union[str, dict, RunnableConfig]) -> Optional[CheckpointTuple]:
         """Get a checkpoint tuple from S3."""
-        thread_id = config["configurable"]["thread_id"]
+        if isinstance(config, str):
+            config = {"configurable": {"thread_id": config}}
+        
+        thread_id = str(config["configurable"]["thread_id"])
         checkpoint_id = get_checkpoint_id(config)
         checkpoint_ns = config["configurable"].get("checkpoint_ns", "")
 
@@ -143,9 +176,11 @@ class S3Saver(BaseCheckpointSaver):
 
         try:
             response = self.s3_client.get_object(Bucket=self.bucket_name, Key=key)
-            checkpoint_data = json.loads(response['Body'].read().decode('utf-8'))
+            checkpoint_data = json.loads(
+                response['Body'].read().decode('utf-8'),
+                object_hook=bytes_decoder
+            )
             
-            # Load pending writes
             checkpoint_id = checkpoint_id or _parse_s3_checkpoint_key(key)["checkpoint_id"]
             pending_writes = self._load_pending_writes(thread_id, checkpoint_ns, checkpoint_id)
             
@@ -163,7 +198,7 @@ class S3Saver(BaseCheckpointSaver):
         limit: Optional[int] = None,
     ) -> Iterator[CheckpointTuple]:
         """List checkpoints from S3."""
-        thread_id = config["configurable"]["thread_id"]
+        thread_id = int(config["configurable"]["thread_id"])
         checkpoint_ns = config["configurable"].get("checkpoint_ns", "")
         prefix = f"checkpoints{S3_KEY_SEPARATOR}{thread_id}{S3_KEY_SEPARATOR}{checkpoint_ns}"
         
@@ -189,7 +224,11 @@ class S3Saver(BaseCheckpointSaver):
         for key in checkpoint_keys:
             try:
                 response = self.s3_client.get_object(Bucket=self.bucket_name, Key=key)
-                data = json.loads(response['Body'].read().decode('utf-8'))
+                # Use custom JSON decoder for bytes objects
+                data = json.loads(
+                    response['Body'].read().decode('utf-8'),
+                    object_hook=bytes_decoder
+                )
                 
                 checkpoint_id = _parse_s3_checkpoint_key(key)["checkpoint_id"]
                 pending_writes = self._load_pending_writes(thread_id, checkpoint_ns, checkpoint_id)
@@ -201,7 +240,7 @@ class S3Saver(BaseCheckpointSaver):
                 continue
 
     def _load_pending_writes(
-        self, thread_id: str, checkpoint_ns: str, checkpoint_id: str
+        self, thread_id: int, checkpoint_ns: str, checkpoint_id: str
     ) -> List[PendingWrite]:
         """Load pending writes for a checkpoint from S3."""
         prefix = f"writes{S3_KEY_SEPARATOR}{thread_id}{S3_KEY_SEPARATOR}{checkpoint_ns}{S3_KEY_SEPARATOR}{checkpoint_id}"
@@ -216,7 +255,11 @@ class S3Saver(BaseCheckpointSaver):
                     
                 for obj in page['Contents']:
                     response = self.s3_client.get_object(Bucket=self.bucket_name, Key=obj['Key'])
-                    data = json.loads(response['Body'].read().decode('utf-8'))
+                    # Use custom JSON decoder for bytes objects
+                    data = json.loads(
+                        response['Body'].read().decode('utf-8'),
+                        object_hook=bytes_decoder
+                    )
                     
                     pending_writes.append((
                         obj['Key'].split(S3_KEY_SEPARATOR)[-2],  # task_id
@@ -229,7 +272,7 @@ class S3Saver(BaseCheckpointSaver):
             return []
 
     def _get_checkpoint_key(
-        self, thread_id: str, checkpoint_ns: str, checkpoint_id: Optional[str]
+        self, thread_id: int, checkpoint_ns: str, checkpoint_id: Optional[str]
     ) -> Optional[str]:
         """Get the S3 key for a checkpoint."""
         if checkpoint_id:
