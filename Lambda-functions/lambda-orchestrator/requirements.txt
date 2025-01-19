@@ -1,3 +1,0 @@
-langchain-aws==0.2.10
-langgraph==0.2.62
-python-dotenv==1.0.1
