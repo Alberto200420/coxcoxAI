@@ -22,3 +22,5 @@ sparrow@LAPTOP-CM1N29F4:~/Colmena-AI$
 sparrow@LAPTOP-CM1N29F4:~/Colmena-AI$ zip lambda-orchestrator_v2.zip ./Lambda-functions/lambda-orchestrator/orchestrator.py ./Lambd
 a-functions/lambda-orchestrator/lambda_function.py ./Lambda-functions/lambda-orchestrator/prompt_templates.py ./Lambda-functions/la
 mbda-orchestrator/s3_checkpointer.py
+
+<iframe width="768" height="432" src="https://miro.com/app/live-embed/uXjVLw0kPWw=/?moveToViewport=-327,-183,632,334&embedId=488295040203" frameborder="0" scrolling="no" allow="fullscreen; clipboard-read; clipboard-write" allowfullscreen></iframe>
