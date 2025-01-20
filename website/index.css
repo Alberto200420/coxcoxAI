@@ -10,6 +10,9 @@ body {
   background-color: #ffffff;
   color: #333;
   line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .container {
@@ -19,6 +22,7 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 40px;
+  flex: 1;
 }
 
 h1 {
@@ -50,6 +54,23 @@ h1 {
   font-size: 1.1em;
 }
 
+.video-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+  height: 0;
+  overflow: hidden;
+}
+
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
 .buttons-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -62,7 +83,7 @@ h1 {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: 20px;
+  padding: 10px;
   background: #fff;
   border: 1px solid #ddd;
   border-radius: 8px;
@@ -82,10 +103,10 @@ h1 {
   margin-bottom: 10px;
 }
 
-.image-section {
-  background-color: #f5f5f5;
-  border-radius: 8px;
-  min-height: 400px;
+footer {
+  padding: 20px;
+  text-align: center;
+  margin-top: auto;
 }
 
 @media (max-width: 768px) {
@@ -93,7 +114,21 @@ h1 {
     grid-template-columns: 1fr;
   }
 
-  .image-section {
-    min-height: 300px;
+  h1 {
+    font-size: 2em;
+  }
+
+  .buttons-container {
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .buttons-container {
+    grid-template-columns: 1fr;
+  }
+
+  h1 {
+    font-size: 1.8em;
   }
 }
