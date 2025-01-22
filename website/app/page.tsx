@@ -1,4 +1,5 @@
 "use client";
+import ChatModel from "@/components/chatModel";
 
 export default function Home() {
   return (
@@ -56,7 +57,7 @@ export default function Home() {
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
-                stroke-width="2"
+                strokeWidth="2"
                 className="w-10 h-10 mb-2"
               >
                 <rect x="3" y="5" width="18" height="14" rx="2" />
@@ -64,23 +65,7 @@ export default function Home() {
               </svg>
               contactame
             </a>
-            <a
-              href="https://api.whatsapp.com/send?phone=+524428968441&text=Me%20encant%C3%B3%20el%20video%2C%20%C2%BFc%C3%B3mo%20funciona%20el%20agente%20de%20IA%3F"
-              className="flex flex-col items-center text-center p-4 bg-white border border-gray-300 rounded-lg text-gray-700 hover:-translate-y-1 hover:shadow-lg transition-transform"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                className="w-10 h-10 mb-2"
-              >
-                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10z" />
-              </svg>
-              Contacta con mi agente
-            </a>
+            <ChatModel />
           </div>
         </div>
       </main>
