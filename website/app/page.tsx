@@ -1,7 +1,10 @@
 "use client";
 import ChatModel from "@/components/chatModel";
+import { useState } from "react";
 
 export default function Home() {
+  const [open, setIsModalOpen] = useState(false);
+  const closeModal = () => setIsModalOpen(false);
   return (
     <div>
       <main className="max-w-screen-xl mx-auto p-10 grid grid-cols-1 md:grid-cols-2 gap-10 flex-1">
@@ -65,10 +68,25 @@ export default function Home() {
               </svg>
               contactame
             </a>
-            <ChatModel />
+            <button
+              onClick={() => setIsModalOpen(true)}
+              className="flex flex-col items-center text-center p-4 bg-white border border-gray-300 rounded-lg text-gray-700 hover:-translate-y-1 hover:shadow-lg transition-transform"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                className="w-10 h-10 mb-2"
+              >
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10z" />
+              </svg>
+              Contacta con mi agente
+            </button>
           </div>
         </div>
       </main>
+      <ChatModel isOpen={open} onClose={closeModal} />
       <footer className="p-5 text-center mt-auto">
         &copy; 2025 COXCOX AI. Todos los derechos reservados.
       </footer>
