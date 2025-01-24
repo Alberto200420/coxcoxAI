@@ -31,7 +31,7 @@ export default function ChatModel({ isOpen, onClose }: ModalProps) {
     setUUID(newRandomInt);
   }, []);
 
-  const handleSend = async (e: any) => {
+  const handleSend = async (e: React.FormEvent) => {
     e.preventDefault();
     if (newMessage.trim() === "") return;
 
@@ -70,7 +70,7 @@ export default function ChatModel({ isOpen, onClose }: ModalProps) {
         text: "Lo siento, hubo un problema al procesar tu mensaje. Intenta nuevamente más tarde.",
         isBot: true,
       };
-
+      console.log(error);
       setMessages((prev) => [...prev, errorMessage]);
     }
   };
