@@ -2,7 +2,7 @@
 
 Coxcox AI is an agent designed to perform telemarketing work
 
-<img src='./assets/coxcox-logo.webp' alt='coxcoxai agent replace telemaketing jobs'/>
+[![Replace Telemarketing with AI](https://img.youtube.com/vi/JqEQ100Dd0w/0.jpg)](https://www.youtube.com/watch?v=JqEQ100Dd0w)
 
 # Connecting to WhatsApp
 
