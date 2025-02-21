@@ -21,13 +21,8 @@ This project provides an AI agent that handles customer interactions on WhatsApp
 
 ## Architecture Overview
 
-WhatsApp → Verification Handler (Lambda) → Event Handler (Lambda) → SQS  
-↑ ↓  
-Webhook Verification Message Processing  
-↓  
-Orchestrator (LangGraph)  
-↓  
-Response Generation → Database/Email
+<img src='../assets/aws_architecture.png' alt='aws serverless agent for replace telemaketing jobs'/>
+<img src='../assets/bedrock_architecture.png' alt='aws bedrock agent for replace telemaketing jobs'/>
 
 ---
 
